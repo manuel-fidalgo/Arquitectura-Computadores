@@ -65,3 +65,42 @@ void Coche::generarMatricula(){
     std::cout << os.str()<< std::endl;
     this->matricula = os.str();
 }
+/**
+ * @brief Coche::darTipoCoche
+ * @return Tipo de coche que es
+ * Sobre un Objeto coche, determina en funcion de sus parametros el tipo de coche(Vehiculo) que es
+ */
+std::string Coche::darTipoCoche(){
+
+    if(this->getRuedas()==2){   //Lisa's bike or homer's motorbike
+        if(this->getCombustible()=="Gasolina"){
+            return this->nombresVehiculos[7];
+        }
+        if(this->getCombustible()=="Pedales"){
+            return this->nombresVehiculos[5];
+        }
+    }else if(this->getRuedas()==3){
+        return this->nombresVehiculos[8];
+    }else{                      //4 ruedas
+        if(this->tieneBocinas()){
+            if(this->tieneBurbuja()){
+                return this->nombresVehiculos[2];
+            }else{
+                return this->nombresVehiculos[4];
+            }
+        }else{
+            if(this->portavasos){
+                return this->nombresVehiculos[1];
+            }else{
+                if(this->getPotencia()>200){
+                    return this->nombresVehiculos[3];
+                }else if(this->getPotencia()<=200 && this->getPotencia()>130){
+                    return this->nombresVehiculos[0];
+                }else{
+                    return this->nombresVehiculos[6];
+                }
+            }
+        }
+    }
+    return "Unknown Car";
+}
