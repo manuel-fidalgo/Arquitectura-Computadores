@@ -12,3 +12,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+void MainWindow::print(){
+    std::cout << "Se ha creado un coche"<<std::endl;
+}
+Ui::MainWindow * MainWindow::getUi(){
+    return this->ui;
+}
+

@@ -63,5 +63,5 @@ void Coche::generarMatricula(){
         }
     }
     std::cout << os.str()<< std::endl;
-
+    this->matricula = os.str();
 }
