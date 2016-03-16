@@ -210,17 +210,30 @@
      <string>Crear coche</string>
     </property>
    </widget>
-   <widget class="QListView" name="listView">
+   <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>20</y>
-      <width>141</width>
-      <height>291</height>
+      <y>30</y>
+      <width>101</width>
+      <height>16</height>
      </rect>
     </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOn</enum>
+    <property name="text">
+     <string>Lista Coches:</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="listaCoches">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>60</y>
+      <width>161</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>CrossCursor</cursorShape>
     </property>
    </widget>
   </widget>

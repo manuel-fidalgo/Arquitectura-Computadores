@@ -19,13 +19,12 @@ private:
         "Springfield police Car",//4 /
         "Lisa's Bike",           //5 /
         "Skinner's kia",         //6
-        "Homer's motorbike"      //7 /
+        "Homer's motorbike",     //7 /
         "Bart's rocket"};        //8 /
     std::string color;
     std::string nombre;
     std::string combustible;
     std::string matricula;
-    std::string darTipoCoche();
 
     int potenciaMotor;
     int numRuedas;
@@ -45,6 +44,8 @@ public:
     std::string getNombre();
     std::string getCombustible();
     std::string getMatricula();
+    std::string darTipoCoche();
+    std::string darCadena();
 
     int getPotencia();
     int getRuedas();
@@ -53,7 +54,7 @@ public:
     bool tieneBurbuja();
     bool tieneBocinas();
 
-    void generarMatricula();
+    void asignarMatricula(std::string s);
 };
 
 #endif // COCHE_H

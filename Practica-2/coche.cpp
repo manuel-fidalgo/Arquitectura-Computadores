@@ -32,6 +32,16 @@ std::string Coche::getCombustible(){
 std::string Coche::getMatricula(){
     return this->matricula;
 }
+std::string Coche::darCadena(){
+    std::stringstream os;
+    os << "Vehiculo: " << this->getNombre() << std::endl
+       << "Tipo: " << this->darTipoCoche() << std::endl
+       << "Color: " << this->getColor() << std::endl
+       << "Matricula: " << this->getMatricula()
+       << std::endl << std::endl;
+    return os.str();
+}
+
 int Coche::getPotencia(){
     return this->potenciaMotor;
 }
@@ -47,24 +57,10 @@ bool Coche::tieneBurbuja(){
 bool Coche::tieneBocinas(){
     return this->variasBocinas;
 }
-void Coche::generarMatricula(){
-    std::stringstream os;
-    int cout=0;
-    int random;
-    for (int var = 0; var < 4; ++var) {
-        os << rand()%10;
-    }
-    while(cout<3){
-        random = (rand()%25)+65;
-        //Excluimos las letas AEIOUQ que son las que no estan incluidas en las matriculas europeas
-        if((random=!65) && (random=!69) && (random=!73) && (random=!79) && (random=!81) && (random=!85)){
-            os << (char)random;
-            cout++;
-        }
-    }
-    std::cout << os.str()<< std::endl;
-    this->matricula = os.str();
+void Coche::asignarMatricula(std::string s){
+    this->matricula = s;
 }
+
 /**
  * @brief Coche::darTipoCoche
  * @return Tipo de coche que es
@@ -73,11 +69,11 @@ void Coche::generarMatricula(){
 std::string Coche::darTipoCoche(){
 
     if(this->getRuedas()==2){   //Lisa's bike or homer's motorbike
-        if(this->getCombustible()=="Gasolina"){
-            return this->nombresVehiculos[7];
-        }
         if(this->getCombustible()=="Pedales"){
             return this->nombresVehiculos[5];
+        }
+        else{
+            return this->nombresVehiculos[7];
         }
     }else if(this->getRuedas()==3){
         return this->nombresVehiculos[8];
@@ -102,5 +98,5 @@ std::string Coche::darTipoCoche(){
             }
         }
     }
-    return "Unknown Car";
+    return "Unknown car";
 }
