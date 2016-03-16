@@ -22,6 +22,7 @@ public:
     ~MainWindow();
     void setMatricula();
     void agnadirCoche();
+    bool exist(std::string m);
     std::string darMatricula();
 private slots:
     void on_genMatriculaButton_clicked();

@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "coche.h"
 #include "listavehiculos.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->cmbustibleComboBox->addItem("Gasolina",QVariant("Gasolina"));
     ui->cmbustibleComboBox->addItem("Diesel",QVariant("Diesel"));
     ui->cmbustibleComboBox->addItem("Pedales",QVariant("Pedales"));
+    getUi()->matriculaTextField->setReadOnly(true);
+    getUi()->listaCoches->setReadOnly(true);
 
 }
 
@@ -40,7 +43,16 @@ void MainWindow::setMatricula(){
 void MainWindow::agnadirCoche(){
     std::string matricula = getUi()->matriculaTextField->text().toStdString();
     if(matricula.length()!=7){
-        std::cout << "No hay matricula" << std::endl;
+        QMessageBox message;
+        message.setText("Matricula vacia.");
+        message.setStandardButtons(QMessageBox::Ok);
+        int res = message.exec();
+        return;
+    }else if(exist(matricula)){
+        QMessageBox message;
+        message.setText("Matricula repetida.");
+        message.setStandardButtons(QMessageBox::Ok);
+        int res = message.exec();
         return;
     }
 
@@ -91,4 +103,15 @@ std::string MainWindow::darMatricula(){
         }
     }
     return os.str();
+}
+bool MainWindow::exist(std::string m){
+    int res;
+    std::string s1;
+    std::vector<Coche> lista = this->lista.getVector();
+    for (int var = 0; var < lista.size(); ++var) {
+        s1 = lista[var].getMatricula();
+         res = strcmp(s1.c_str(),m.c_str());
+        if(res==0) return true;
+    }
+    return false;
 }

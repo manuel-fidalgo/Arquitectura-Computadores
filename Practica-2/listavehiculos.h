@@ -11,6 +11,7 @@ private:
 public:
     ListaVehiculos();
     void agnadirCoche(Coche c);
+    std::vector<Coche> getVector();
 };
 
 #endif // LISTAVEHICULOS_H
