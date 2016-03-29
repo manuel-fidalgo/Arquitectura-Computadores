@@ -18,6 +18,7 @@ public:
     int*** getMatrix();
     double init(int DIMENSIONS);
     int getNTest();
+    void liberarMemoria(int *** matrix, int *** trans, int DIMENSIONS);
 };
 
 #endif // MATRIX_TEST_H
