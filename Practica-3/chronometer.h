@@ -17,9 +17,10 @@ class Chronometer
     bool isWindows;
     double timeval_diff(struct timeval *a, struct timeval *b);
     double performancecounter_diff(LARGE_INTEGER *a, LARGE_INTEGER *b);
-
+    void switchOS(bool * isWindows);
 public:
     Chronometer();
+    ~Chronometer();
     void init();
     double end();
 };

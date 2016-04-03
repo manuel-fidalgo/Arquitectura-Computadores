@@ -1,6 +1,7 @@
 #include "matrix_test.h"
 Matrix_test::Matrix_test(){
     this->nTest=0;
+    crono = new Chronometer();
 }
 
 int *** Matrix_test::getMatrix(){
@@ -15,6 +16,9 @@ int *** Matrix_test::getMatrix(){
 double Matrix_test::init(int DIMENSIONS){
     int *** trans;
 
+    /**/
+    crono->init();
+    /**/
     srand(time(NULL));
     this->nTest++;
 
@@ -55,12 +59,13 @@ double Matrix_test::init(int DIMENSIONS){
     free(matrix);
     free(trans);
    // liberarMemoria(matrix,trans,DIMENSIONS);
-    return performancecounter_diff(&t_fin, &t_ini);
+    return crono->end();
 }
 
 int Matrix_test::getNTest(){
     return this->nTest;
 }
+/*
 void Matrix_test::liberarMemoria(int ***matrix, int*** trans, int DIMENSIONS){
     for (int x = 0; x < DIMENSIONS; ++x) {
         for (int y = 0; y < DIMENSIONS; ++y) {
@@ -71,3 +76,4 @@ void Matrix_test::liberarMemoria(int ***matrix, int*** trans, int DIMENSIONS){
        }
     }
 }
+*/

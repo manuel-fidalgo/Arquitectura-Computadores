@@ -11,7 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>BenchMark</string>
+  </property>
+  <property name="windowOpacity">
+   <double>0.900000000000000</double>
+  </property>
+  <property name="toolTip">
+   <string/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="Ok_1">
@@ -50,16 +56,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QComboBox" name="Selection_2">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>280</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPlainTextEdit" name="Log_2">
     <property name="geometry">
      <rect>
@@ -84,10 +80,13 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>40</y>
+      <y>10</y>
       <width>321</width>
-      <height>141</height>
+      <height>171</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Matriz 3D test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
      <string/>
@@ -100,16 +99,55 @@
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>40</y>
+      <y>10</y>
       <width>321</width>
-      <height>141</height>
+      <height>171</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Imagen Test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
      <pixmap>../Source-Practica-3/Imagen_2.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="path">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>280</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>230</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tamaño de la matriz:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>230</y>
+      <width>131</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Directorio del ultimo test:</string>
     </property>
    </widget>
   </widget>

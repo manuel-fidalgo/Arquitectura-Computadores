@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <matrix_test.h>
+#include "matrix_test.h"
+#include "image_test.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,10 +20,12 @@ public:
 
 private slots:
     void on_Ok_1_clicked();
+    void on_Ok_2_clicked();
 
 private:
     Ui::MainWindow *ui;
     Matrix_test matrix_test;
+    Image_test image_test;
 
 };
 

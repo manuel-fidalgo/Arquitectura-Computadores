@@ -3,8 +3,13 @@
 Chronometer::Chronometer()
 {
  this->executing_chrono=false;
-
+ switchOS(&isWindows);
+ this->isWindows=true;
 }
+Chronometer::~Chronometer(){
+    delete this;
+}
+
 void Chronometer::init(){
      if(isWindows)
         QueryPerformanceCounter(&t_ini);
@@ -33,6 +38,8 @@ double Chronometer::performancecounter_diff(LARGE_INTEGER *a, LARGE_INTEGER *b){
 }
 double Chronometer::timeval_diff(struct timeval *a, struct timeval *b){
   return
-    (double)(a->tv_sec + (double)a->tv_usec/1000000) -
-    (double)(b->tv_sec + (double)b->tv_usec/1000000);
+    (double)(a->tv_sec + (double)a->tv_usec/1000000) - (double)(b->tv_sec + (double)b->tv_usec/1000000);
+}
+void Chronometer::switchOS(bool * isWindows){
+    *isWindows=true;
 }
