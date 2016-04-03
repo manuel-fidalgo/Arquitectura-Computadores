@@ -11,7 +11,6 @@ class Matrix_test
 {
 private:
     int *** matrix;
-    double performancecounter_diff(LARGE_INTEGER *a, LARGE_INTEGER *b);
     int nTest;
 public:
     Matrix_test();

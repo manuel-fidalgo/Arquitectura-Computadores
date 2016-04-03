@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    matrix_test.cpp
+    matrix_test.cpp \
+    chronometer.cpp
 
 HEADERS  += mainwindow.h \
-    matrix_test.h
+    matrix_test.h \
+    chronometer.h
 
 FORMS    += mainwindow.ui
 

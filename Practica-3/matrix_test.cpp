@@ -18,9 +18,6 @@ double Matrix_test::init(int DIMENSIONS){
     srand(time(NULL));
     this->nTest++;
 
-    LARGE_INTEGER t_ini, t_fin;
-    QueryPerformanceCounter(&t_ini);
-
     matrix = (int ***)malloc(DIMENSIONS*sizeof(int **));
     trans = (int ***)malloc(DIMENSIONS*sizeof(int **));
     if(matrix==NULL)return -1;
@@ -55,17 +52,10 @@ double Matrix_test::init(int DIMENSIONS){
             }
         }
     }
-    QueryPerformanceCounter(&t_fin);
     free(matrix);
     free(trans);
    // liberarMemoria(matrix,trans,DIMENSIONS);
     return performancecounter_diff(&t_fin, &t_ini);
-}
-/*WINDOWS TEST*/
-double Matrix_test::performancecounter_diff(LARGE_INTEGER *a, LARGE_INTEGER *b){
-    LARGE_INTEGER freq;
-    QueryPerformanceFrequency(&freq);
-    return (double)(a->QuadPart - b->QuadPart) / (double)freq.QuadPart;
 }
 
 int Matrix_test::getNTest(){
