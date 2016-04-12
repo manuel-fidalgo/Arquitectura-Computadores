@@ -1,7 +1,11 @@
 #include "matrix_test.h"
+
 Matrix_test::Matrix_test(){
+
+}
+Matrix_test::Matrix_test(int OS){
     this->nTest=0;
-    crono = new Chronometer();
+    crono = new Chronometer(OS);
 }
 
 int *** Matrix_test::getMatrix(){
@@ -11,7 +15,6 @@ int *** Matrix_test::getMatrix(){
  * @brief Matrix_test::init
  * @param DIMENSIONS
  * @return Time of the test
- * ERROR EN POSIBLE FALLO DE ALOJAMIENTO DE MEMORIA!
  */
 double Matrix_test::init(int DIMENSIONS){
     int *** trans;
@@ -58,22 +61,10 @@ double Matrix_test::init(int DIMENSIONS){
     }
     free(matrix);
     free(trans);
-   // liberarMemoria(matrix,trans,DIMENSIONS);
     return crono->end();
 }
 
 int Matrix_test::getNTest(){
     return this->nTest;
 }
-/*
-void Matrix_test::liberarMemoria(int ***matrix, int*** trans, int DIMENSIONS){
-    for (int x = 0; x < DIMENSIONS; ++x) {
-        for (int y = 0; y < DIMENSIONS; ++y) {
-            for (int z = 0;  z< DIMENSIONS; z++) {
-              // free(matrix[x][y][z]);
-              // free(trans[x][y][z]);
-            }
-       }
-    }
-}
-*/
+

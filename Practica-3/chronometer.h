@@ -10,16 +10,15 @@
 class Chronometer
 {
    private:
-
     LARGE_INTEGER t_ini, t_fin;         //Para sistemas windows
     struct timeval t_ini_u, t_fin_u;    //Para sistemas unix
     bool executing_chrono;
     bool isWindows;
     double timeval_diff(struct timeval *a, struct timeval *b);
     double performancecounter_diff(LARGE_INTEGER *a, LARGE_INTEGER *b);
-    void switchOS(bool * isWindows);
+    void switchOS(bool * isWindows, int OS);
 public:
-    Chronometer();
+    Chronometer(int OS);
     ~Chronometer();
     void init();
     double end();

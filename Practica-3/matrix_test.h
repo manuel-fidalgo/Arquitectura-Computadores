@@ -17,6 +17,7 @@ private:
 
 public:
     Matrix_test();
+    Matrix_test(int OS);
     int*** getMatrix();
     double init(int DIMENSIONS);
     int getNTest();

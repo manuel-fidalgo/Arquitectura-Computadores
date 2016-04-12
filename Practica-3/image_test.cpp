@@ -1,9 +1,11 @@
 #include "image_test.h"
 
-
 Image_test::Image_test(){
+
+}
+Image_test::Image_test(int OS){
     this->nTest=0;
-    this->chrono = new Chronometer();
+    this->chrono = new Chronometer(OS);
 
 }
 double Image_test::init(QImage q){
@@ -20,10 +22,10 @@ int Image_test::getNTest(){
     return this->nTest;
 }
 void Image_test::toGreyScale(QImage *q ){
-    for (int ii = 0; ii < q.width(); ii++) {
-        for (int jj = 0; jj < q.height(); jj++) {
-            int gray = qGray(*q.pixel(ii, jj));
-            *q.setPixel(ii, jj, QColor(gray, gray, gray).rgb());
+    for (int ii = 0; ii < q->width(); ii++) {
+        for (int jj = 0; jj < q->height(); jj++) {
+            int gray = qGray(q->pixel(ii, jj));
+            q->setPixel(ii, jj, QColor(gray, gray, gray).rgb());
         }
     }
 }

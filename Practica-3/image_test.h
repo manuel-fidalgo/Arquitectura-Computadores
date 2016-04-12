@@ -1,6 +1,6 @@
 #ifndef IMAGE_TEST_H
 #define IMAGE_TEST_H
-#include <iostream>;
+#include <iostream>
 #include <string>
 #include <QImage>
 #include <QColor>
@@ -14,6 +14,7 @@ private:
     Chronometer * chrono;
 public:
     Image_test();
+    Image_test(int OS);
     double init(QImage q);
     int getNTest();
     void toGreyScale(QImage * q);
