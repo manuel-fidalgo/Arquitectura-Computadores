@@ -79,7 +79,7 @@ void MainWindow::on_pushButton_0_clicked()
 
 void MainWindow::on_pushButton_coma_clicked()
 {
-    this->strstm << ',';
+    this->strstm << '.';
     printOnScreen();
 }
 
@@ -110,17 +110,22 @@ void MainWindow::on_pushButton_entre_clicked()
     printOnScreen();
     statusOperationButtons(false);
 }
+void MainWindow::on_pushButton_dot_clicked()
+{
+    this->strstm << '.';
+    printOnScreen();
+}
 
 void MainWindow::on_pushButton_igual_clicked()
 {
     statusOperationButtons(true);
     std::string operation = this->strstm.str();
-    int result_IEEE = 0;
-    int result_NORMAL = 0;
+    float result_IEEE = 0;
+    float result_NORMAL = 0;
     AritmethicLogicUnit * c = new  AritmethicLogicUnit(&result_IEEE,&result_NORMAL,operation);
     c->solve();
     std::stringstream st;
-    st << "IEEE->"<<result_IEEE<<"   Normal->"<<result_NORMAL;
+    st << "IEEE-> "<<result_IEEE<<"   Normal-> "<<result_NORMAL;
     ui->screen->setText(QString::fromStdString(st.str()));
     delete c; //Delete the unity aritmethiclogic
     this->strstm.str("");
@@ -137,9 +142,3 @@ void MainWindow::statusOperationButtons(bool status){
     ui->pushButton_por->setEnabled(status);
 }
 
-
-void MainWindow::on_pushButton_dot_clicked()
-{
-    this->strstm << ',';
-    printOnScreen();
-}

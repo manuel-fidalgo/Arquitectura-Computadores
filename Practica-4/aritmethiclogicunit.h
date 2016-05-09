@@ -1,6 +1,8 @@
 #ifndef ARITMETHICLOGICUNIT_H
 #define ARITMETHICLOGICUNIT_H
 #include <string>
+#include <iostream>
+#include <QString>
 
 
 
@@ -8,13 +10,19 @@ class AritmethicLogicUnit
 {
 public:
     AritmethicLogicUnit();
-    AritmethicLogicUnit(int* normal, int * ieee, std::string opertation);
+    AritmethicLogicUnit(float* normal, float * ieee, std::string opertation);
     void solve();
-    void tokenizeString(int * n1, int * n2);
+    int tokenizeString(float *n1, float *n2);
 private:
-    int * normal;
-    int * ieee;
+    float * normal;
+    float * ieee;
     std::string oper;
+    float suma(float oper1,float oper2);
+    float resta(float oper1,float oper2);
+    float multiplicacion(float oper1,float oper2);
+    float division(float oper1,float oper2);
+    float toBinaryIEEE(float number);
+    float toBinary (float num);
 };
 
 #endif // ARITMETHICLOGICUNIT_H
