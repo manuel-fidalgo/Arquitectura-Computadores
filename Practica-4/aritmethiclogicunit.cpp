@@ -39,6 +39,7 @@ void AritmethicLogicUnit::solve(){
 
     float oper_1 = toBinaryIEEE(oper_1);
     float oper_2 = toBinaryIEEE(oper_1);
+    std::cout << oper_1 << " <-> " <<oper_2;
 
     float res_binario;
     float res_decimal;
@@ -77,10 +78,17 @@ float AritmethicLogicUnit::toBinaryIEEE(float number){
 
 }
 float AritmethicLogicUnit::toBinary (float num){
-    if (num < 2){
-        return num;
-    }
-    else {
-        return num%2 + ( 10 * toBinary(num/2));
-    }
+    union{
+        int integer_val;
+        float float_val;
+    } current_union;
+
+    current_union.float_val = num;
+
+    std::bitset<sizeof(float) * CHAR_BIT>  bits(current_union.integer_val);
+
+    std::cout << bits << std::endl;
+
+    return 0;
+
 }
