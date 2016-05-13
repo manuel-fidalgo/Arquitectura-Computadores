@@ -15,9 +15,14 @@
 class AritmethicLogicUnit
 {
 public:
+    struct outPutData{
+        std::bitset<TEMP> IEEE_bits;
+        std::string IEEE_hex;
+    };
+
     AritmethicLogicUnit();
     AritmethicLogicUnit(float* normal, float * ieee, std::string opertation);
-    void solve();
+    outPutData solve();
     int tokenizeString(float *n1, float *n2);
 private:
     float * normal;

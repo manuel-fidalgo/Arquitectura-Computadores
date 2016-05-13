@@ -32,7 +32,7 @@ int AritmethicLogicUnit::tokenizeString(float * n1, float * n2){
 
 }
 
-void AritmethicLogicUnit::solve(){
+AritmethicLogicUnit::outPutData AritmethicLogicUnit::solve(){
     float oper_1_decimal = 0;
     float oper_2_decimal = 0;
     int  op = tokenizeString(&oper_1_decimal,&oper_2_decimal);
@@ -58,10 +58,14 @@ void AritmethicLogicUnit::solve(){
         res_decimal = oper_1_decimal/oper_2_decimal;
         break;
     }
-    std::string s = toHex(oper_1);
+   outPutData out;
     //Devolvemos los resultados en forma de punteros
     *this->normal = res_decimal;
     *this->ieee = toDecimal(res_binario);
+   //Pasamos los parametros al struct que vamos a devolver.
+   out.IEEE_bits = res_binario;
+   out.IEEE_hex = toHex(res_binario);
+   return out;
 }
 std::bitset<TEMP> AritmethicLogicUnit::suma(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
     return oper1;
@@ -88,11 +92,18 @@ std::bitset<TEMP> AritmethicLogicUnit::toBinary (float num){
 
 }
 float AritmethicLogicUnit::toDecimal(std::bitset<TEMP> num){
-    return 0;
+    union{
+       long  in;
+       float out;
+    } current_union;
+
+    current_union.in = num.to_ulong();
+    if(DEBUG) std::cout << "toDecimal-> " <<current_union.out << std::endl;
+    return current_union.out;
 }
 std::string AritmethicLogicUnit::toHex(std::bitset<TEMP> num){
     std::ostringstream res;
     res << std::hex << std::uppercase << num.to_ulong() << std::endl;
-    if(DEBUG) std::cout << res.str();
+    if(DEBUG) std::cout <<"Hex->"<< res.str();
     return res.str();
 }

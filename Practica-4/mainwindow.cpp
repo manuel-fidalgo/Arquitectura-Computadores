@@ -119,13 +119,15 @@ void MainWindow::on_pushButton_dot_clicked()
 void MainWindow::on_pushButton_igual_clicked()
 {
     statusOperationButtons(true);
+
     std::string operation = this->strstm.str();
     float result_IEEE = 0;
     float result_NORMAL = 0;
     AritmethicLogicUnit * c = new  AritmethicLogicUnit(&result_IEEE,&result_NORMAL,operation);
-    c->solve();
+    AritmethicLogicUnit::outPutData os= c->solve();
     std::stringstream st;
-    st << "IEEE-> "<<result_IEEE<<"   Normal-> "<<result_NORMAL;
+    st <<"\t------Resultados------\n"<< "\n  (" <<operation <<") = "<<"\n\n\tIEEE-> "<<result_IEEE<<"  Normal-> "<<result_NORMAL
+       <<"\n\tBinario-> " <<os.IEEE_bits <<"\n\t"<<"Hexadecimal-> 0x" <<os.IEEE_hex<<std::endl;
     ui->screen->setText(QString::fromStdString(st.str()));
     delete c; //Delete the unity aritmethiclogic
     this->strstm.str("");
