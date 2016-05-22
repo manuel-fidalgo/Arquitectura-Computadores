@@ -7,8 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->screen->setTextColor(QColor(200,0,0,255));
-
+    ui->screen->setTextColor(QColor(100,100,255,255));
+    QPalette p = this->palette();
+    p.setColor(backgroundRole(), QColor(255,255,255));
+    this->setPalette(p);
 }
 
 MainWindow::~MainWindow()

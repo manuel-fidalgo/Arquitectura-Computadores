@@ -76,7 +76,7 @@ std::bitset<TEMP> AritmethicLogicUnit::multiplicacion(std::bitset<TEMP> oper1, s
     std::bitset<TEMP> * res = new std::bitset<TEMP>();
     res->set(0,!oper1[0] != !oper2[0]); //Bit de signo
     sumaExponentes(res,oper1,oper2); //exponentes
-
+    multiplicarMantisas(res,oper1,oper2);
     return oper1;
 }
 std::bitset<TEMP> AritmethicLogicUnit::division(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){

@@ -3,13 +3,16 @@
 
 #define TEMP sizeof(float) * CHAR_BIT
 #define NUM_BITS 32
+#define EXP_DESP 127
+#define DEBUG 1
+#define DESPLAZAMIENTO_EXPONENENTE 23
 
 #include <string>
 #include <sstream>
 #include <iostream>
 #include <QString>
 #include <bitset>
-
+#include <math.h>
 
 
 class AritmethicLogicUnit
@@ -30,13 +33,18 @@ private:
     std::string oper;
     //OPERATIONS
     std::bitset<TEMP> suma(std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
-    std::bitset<TEMP> resta(std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
     std::bitset<TEMP> multiplicacion(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2);
     std::bitset<TEMP> division(std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
+
+    //INTERNAL OPERATIONS
+    int getExp(std::bitset<TEMP> binaryNumber);
+    void sumaExponentes(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
+    void setExponent(int exp, std::bitset<8> binary);
     //CASTS
     std::bitset<TEMP> toBinary (float num);
     float toDecimal(std::bitset<TEMP> num);
     std::string toHex(std::bitset<TEMP> num);
+
 };
 
 #endif // ARITMETHICLOGICUNIT_H
