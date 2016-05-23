@@ -61,10 +61,10 @@ AritmethicLogicUnit::outPutData AritmethicLogicUnit::solve(){
     outPutData out;
     //Devolvemos los resultados en forma de punteros
     *this->normal = res_decimal;
-    *this->ieee = toDecimal(res_binario);
+    *this->ieee = toDecimal(toBinary(res_decimal));
     //Pasamos los parametros al struct que vamos a devolver.
-    out.IEEE_bits = res_binario;
-    out.IEEE_hex = toHex(res_binario);
+    out.IEEE_bits = toBinary(res_decimal);
+    out.IEEE_hex = toHex(toBinary(res_decimal));
     return out;
 }
 std::bitset<TEMP> AritmethicLogicUnit::suma(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
@@ -76,7 +76,7 @@ std::bitset<TEMP> AritmethicLogicUnit::multiplicacion(std::bitset<TEMP> oper1, s
     std::bitset<TEMP> * res = new std::bitset<TEMP>();
     res->set(0,!oper1[0] != !oper2[0]); //Bit de signo
     sumaExponentes(res,oper1,oper2); //exponentes
-
+    multiplicarMantisas(res,oper1,oper2);
     return oper1;
 }
 std::bitset<TEMP> AritmethicLogicUnit::division(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
@@ -148,6 +148,9 @@ void AritmethicLogicUnit::setExponent(int exp, std::bitset<8> binary){
         }
 
     }
+}
+void multiplicarMantisas(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2){
+
 }
 
 
