@@ -61,17 +61,55 @@ AritmethicLogicUnit::outPutData AritmethicLogicUnit::solve(){
     outPutData out;
     //Devolvemos los resultados en forma de punteros
     *this->normal = res_decimal;
-    *this->ieee = toDecimal(toBinary(res_decimal));
+    *this->ieee = toDecimal(res_binario);
     //Pasamos los parametros al struct que vamos a devolver.
-    out.IEEE_bits = toBinary(res_decimal);
-    out.IEEE_hex = toHex(toBinary(res_decimal));
+    out.IEEE_bits = res_binario;
+    out.IEEE_hex = toHex(res_binario);
     return out;
 }
+    /*
+     * resta = expondente es el resultado del mayor
+     * signo = singo del mayor(del que tiene mayo exponente)
+     * exponente es el de mayor exponente
+     * cgemos las mantisas de 24 bits y desplazamos hacia la derecha la amntira del expoente menor tantos lugares como diferncia de exponentes haya
+     * si el ultimo acarreo es 1 le sumamos 1 al exponente
+     */
 std::bitset<TEMP> AritmethicLogicUnit::suma(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
     std::bitset<TEMP> res;
 
-    return oper1;
+    double oper1_exp = getExp(oper1);
+    double oper2_exp = getExp(oper2);
+    float exp = oper1_exp+oper2_exp;
+
+    if(oper1_exp > oper2_exp){
+
+        res.set(0,oper1[0]);
+        desplazarMantisa(oper2,oper1_exp,oper2_exp);
+        int ac = sumarMantisas(res,oper1,oper2);
+        if(ac) exp++;
+        setExponent(exp,res);
+
+    }
+    if(oper2_exp > oper1_exp){
+
+        res.set(0,oper2[0]);
+        desplazarMantisa(oper1,oper1_exp,oper2_exp);
+        int ac = sumarMantisas(res,oper2,oper1);
+        if(ac) exp++;
+        setExponent(exp,res);
+
+    }
+    return res;
 }
+/*Toma ambos numeros, almacena los 24 bits de la mantisa en el resultad y devuelve el accarreo*/
+int AritmethicLogicUnit::sumarMantisas(std::bitset<TEMP> res,std::bitset<TEMP> oper1, std::bitset<TEMP> oper2 ){
+
+}
+
+void AritmethicLogicUnit::desplazarMantisa(std::bitset<TEMP> oper,float op1_exp, float op2_exp){
+    int desp = op1_exp+op2_exp;
+}
+
 std::bitset<TEMP> AritmethicLogicUnit::multiplicacion(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
     std::bitset<TEMP> * res = new std::bitset<TEMP>();
     res->set(0,!oper1[0] != !oper2[0]); //Bit de signo
@@ -79,6 +117,11 @@ std::bitset<TEMP> AritmethicLogicUnit::multiplicacion(std::bitset<TEMP> oper1, s
     multiplicarMantisas(res,oper1,oper2);
     return oper1;
 }
+/*Multiplica las mantisas y las almacena en el resultado*/
+void AritmethicLogicUnit::multiplicarMantisas(std::bitset<TEMP> *res, std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
+
+}
+
 std::bitset<TEMP> AritmethicLogicUnit::division(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
     return oper1;
 }
@@ -131,24 +174,10 @@ void AritmethicLogicUnit::sumaExponentes(std::bitset<TEMP> * res, std::bitset<TE
     }
     delete exponente;
 }
-void AritmethicLogicUnit::setExponent(int exp, std::bitset<8> binary){
-    exp += 127;
-    double accumulator = 0;
-    double power = 7;
+void AritmethicLogicUnit::setExponent(int exp, std::bitset<TEMP> binary){
 
-    for(int i = 1; i < 9; i++){
-        double temp = accumulator;
-        temp += pow((double)2, power);
-
-        if(temp > exp)
-            power--;
-        if(temp < exp){
-            binary.set(i) = 1;
-            accumulator = temp;
-        }
-
-    }
 }
+
 void multiplicarMantisas(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2){
 
 }

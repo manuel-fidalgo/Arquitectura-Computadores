@@ -39,8 +39,10 @@ private:
     //INTERNAL OPERATIONS
     int getExp(std::bitset<TEMP> binaryNumber);
     void sumaExponentes(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
-    void setExponent(int exp, std::bitset<8> binary);
+    void setExponent(int exp, std::bitset<TEMP> binary);
+    int sumarMantisas(std::bitset<TEMP> res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2 );
     void multiplicarMantisas(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
+    void desplazarMantisa(std::bitset<TEMP> oper,float op1_exp, float op2_exp);
     //CASTS
     std::bitset<TEMP> toBinary (float num);
     float toDecimal(std::bitset<TEMP> num);
