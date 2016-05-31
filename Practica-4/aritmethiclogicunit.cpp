@@ -67,9 +67,9 @@ AritmethicLogicUnit::outPutData AritmethicLogicUnit::solve(){
     out.IEEE_hex = toHex(res_binario);
     return out;
 }
-    /*
+/*
      * resta = expondente es el resultado del mayor
-     * signo = singo del mayor(del que tiene mayo exponente)
+     * signo = singo del mayor(del que tiene mayor exponente)
      * exponente es el de mayor exponente
      * cgemos las mantisas de 24 bits y desplazamos hacia la derecha la amntira del expoente menor tantos lugares como diferncia de exponentes haya
      * si el ultimo acarreo es 1 le sumamos 1 al exponente
@@ -81,12 +81,15 @@ std::bitset<TEMP> AritmethicLogicUnit::suma(std::bitset<TEMP> oper1, std::bitset
     double oper2_exp = getExp(oper2);
     float exp = oper1_exp+oper2_exp;
 
+
     if(oper1_exp > oper2_exp){
 
         res.set(0,oper1[0]);
         desplazarMantisa(oper2,oper1_exp,oper2_exp);
         int ac = sumarMantisas(res,oper1,oper2);
-        if(ac) exp++;
+        if(ac==1)
+            exp++;
+
         setExponent(exp,res);
 
     }
@@ -95,19 +98,46 @@ std::bitset<TEMP> AritmethicLogicUnit::suma(std::bitset<TEMP> oper1, std::bitset
         res.set(0,oper2[0]);
         desplazarMantisa(oper1,oper1_exp,oper2_exp);
         int ac = sumarMantisas(res,oper2,oper1);
-        if(ac) exp++;
+        if(ac==1)
+            exp++;
+
         setExponent(exp,res);
+
+    }
+    if(oper1_exp==oper2_exp){
 
     }
     return res;
 }
 /*Toma ambos numeros, almacena los 24 bits de la mantisa en el resultad y devuelve el accarreo*/
 int AritmethicLogicUnit::sumarMantisas(std::bitset<TEMP> res,std::bitset<TEMP> oper1, std::bitset<TEMP> oper2 ){
+   bool c=0;
 
+    for (int var = 31; var >= 8; ++var) {
+        res.set(var,XOR(XOR(oper1[var],oper2[var]),c));
+        c =((oper1[var]&oper2[var])|(oper1[var] & c)|(oper2[var] & c));
+    }
+    return c;
+}
+
+bool AritmethicLogicUnit::XOR(bool a, bool b)
+{
+    return (a + b) % 2;
 }
 
 void AritmethicLogicUnit::desplazarMantisa(std::bitset<TEMP> oper,float op1_exp, float op2_exp){
-    int desp = op1_exp+op2_exp;
+    int desp = abs(op1_exp-op2_exp);
+    int ac;
+    /*bits del 8 al 31 inclusive*/
+    std::bitset<23> mantisa;
+    for (int var = 8; var < 32; ++var) {
+        mantisa.set(var-8,oper[var]);
+    }
+    mantisa << desp; //mantisa desplazada tantas posiciones como es necesario.
+    for (int var = 8; var < 32; ++var) {
+        oper.set(var,mantisa[var-8]);
+    }
+
 }
 
 std::bitset<TEMP> AritmethicLogicUnit::multiplicacion(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){

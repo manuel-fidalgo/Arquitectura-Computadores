@@ -43,6 +43,7 @@ private:
     int sumarMantisas(std::bitset<TEMP> res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2 );
     void multiplicarMantisas(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
     void desplazarMantisa(std::bitset<TEMP> oper,float op1_exp, float op2_exp);
+    bool XOR(bool a, bool b);
     //CASTS
     std::bitset<TEMP> toBinary (float num);
     float toDecimal(std::bitset<TEMP> num);
