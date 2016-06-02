@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QPalette p = this->palette();
     p.setColor(backgroundRole(), QColor(255,255,255));
     this->setPalette(p);
+    ui->pushButton_entre->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -128,7 +129,7 @@ void MainWindow::on_pushButton_igual_clicked()
     AritmethicLogicUnit * c = new  AritmethicLogicUnit(&result_IEEE,&result_NORMAL,operation);
     AritmethicLogicUnit::outPutData os= c->solve();
     std::stringstream st;
-    st <<"\t------Resultados------\n"<< "\n  (" <<operation <<") = "<<"\n\n\tIEEE-> "<<result_IEEE<<"  Normal-> "<<result_NORMAL
+    st <<"\t------Resultados------\n"<< "\n  (" <<operation <<") = "<<"\n\n\tDecimal-> "<<result_IEEE
        <<"\n\tBinario-> " <<os.IEEE_bits <<"\n\t"<<"Hexadecimal-> 0x" <<os.IEEE_hex<<std::endl;
     ui->screen->setText(QString::fromStdString(st.str()));
     delete c; //Delete the unity aritmethiclogic
@@ -140,7 +141,6 @@ void MainWindow::printOnScreen(){
 }
 
 void MainWindow::statusOperationButtons(bool status){
-    ui->pushButton_entre->setEnabled(status);
     ui->pushButton_mas->setEnabled(status);
     ui->pushButton_menos->setEnabled(status);
     ui->pushButton_por->setEnabled(status);

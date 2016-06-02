@@ -61,10 +61,10 @@ AritmethicLogicUnit::outPutData AritmethicLogicUnit::solve(){
     outPutData out;
     //Devolvemos los resultados en forma de punteros
     *this->normal = res_decimal;
-    *this->ieee = toDecimal(res_binario);
+    *this->ieee = res_decimal;
     //Pasamos los parametros al struct que vamos a devolver.
-    out.IEEE_bits = res_binario;
-    out.IEEE_hex = toHex(res_binario);
+    out.IEEE_bits = toBinary(res_decimal);
+    out.IEEE_hex = toHex(toBinary(res_decimal));
     return out;
 }
 /*
@@ -90,7 +90,7 @@ std::bitset<TEMP> AritmethicLogicUnit::suma(std::bitset<TEMP> oper1, std::bitset
         if(ac==1)
             exp++;
 
-        setExponent(exp,res);
+        setExponent(exp,&res);
 
     }
     if(oper2_exp > oper1_exp){
@@ -101,17 +101,14 @@ std::bitset<TEMP> AritmethicLogicUnit::suma(std::bitset<TEMP> oper1, std::bitset
         if(ac==1)
             exp++;
 
-        setExponent(exp,res);
-
-    }
-    if(oper1_exp==oper2_exp){
+        setExponent(exp,&res);
 
     }
     return res;
 }
 /*Toma ambos numeros, almacena los 24 bits de la mantisa en el resultad y devuelve el accarreo*/
 int AritmethicLogicUnit::sumarMantisas(std::bitset<TEMP> res,std::bitset<TEMP> oper1, std::bitset<TEMP> oper2 ){
-   bool c=0;
+    bool c=0;
 
     for (int var = 31; var >= 8; ++var) {
         res.set(var,XOR(XOR(oper1[var],oper2[var]),c));
@@ -149,9 +146,23 @@ std::bitset<TEMP> AritmethicLogicUnit::multiplicacion(std::bitset<TEMP> oper1, s
 }
 /*Multiplica las mantisas y las almacena en el resultado*/
 void AritmethicLogicUnit::multiplicarMantisas(std::bitset<TEMP> *res, std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
-
+                                                                                                                                    try{
+    std::bitset<TEMP> r;
+    std::bitset<23*2> mat;
+    for (int var = 31; var < 9; ++var) {
+        mat.set(var-9,oper1[var]*oper2[var]);
+        mat<<1;
+    }
+    /*resultado de la multiplicaion bits 0-22 de mat*/
+    int index_1 = 9;
+   while(true){
+       res->set(index_1,mat[index_1-9]);
+       index_1++;
+       if(index_1==31) break;
+   }
+                                                                                                                                       }catch(std::exception){};
 }
-
+/*No implementada*/
 std::bitset<TEMP> AritmethicLogicUnit::division(std::bitset<TEMP> oper1, std::bitset<TEMP> oper2){
     return oper1;
 }
@@ -164,7 +175,6 @@ std::bitset<TEMP> AritmethicLogicUnit::toBinary (float num){
     } current_union;
     current_union.float_val = num;
     std::bitset<TEMP>  bits(current_union.integer_val);
-    if(DEBUG) std::cout << num <<"\t--->" << bits << std::endl;
     return bits;
 
 }
@@ -175,13 +185,11 @@ float AritmethicLogicUnit::toDecimal(std::bitset<TEMP> num){
     } current_union;
 
     current_union.in = num.to_ulong();
-    if(DEBUG) std::cout << "toDecimal-> " << current_union.out << std::endl;
     return current_union.out;
 }
 std::string AritmethicLogicUnit::toHex(std::bitset<TEMP> num){
     std::ostringstream res;
     res << std::hex << std::uppercase << num.to_ulong() << std::endl;
-    if(DEBUG) std::cout <<"Hex->"<< res.str();
     return res.str();
 }
 int AritmethicLogicUnit::getExp(std::bitset<TEMP> binaryNumber){
@@ -204,12 +212,22 @@ void AritmethicLogicUnit::sumaExponentes(std::bitset<TEMP> * res, std::bitset<TE
     }
     delete exponente;
 }
-void AritmethicLogicUnit::setExponent(int exp, std::bitset<TEMP> binary){
+void AritmethicLogicUnit::setExponent(int exp, std::bitset<TEMP> * binary){
+    std::bitset<8> bin;
+    try{
+        int index = 8;
+        while(true){
+            bin.set(index,exp%2);
+            exp = exp/2;
+            index--;
+            if(exp==0||exp==1) break;
+        }
 
+    }catch(std::exception){}
+    for (int var = 0; var < 8; --var) {
+        binary->set(var+1,bin[var]);
+    }
 }
 
-void multiplicarMantisas(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2){
-
-}
 
 

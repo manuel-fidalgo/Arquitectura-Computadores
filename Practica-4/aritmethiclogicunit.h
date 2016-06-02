@@ -9,7 +9,6 @@
 
 #include <string>
 #include <sstream>
-#include <iostream>
 #include <QString>
 #include <bitset>
 #include <math.h>
@@ -39,7 +38,7 @@ private:
     //INTERNAL OPERATIONS
     int getExp(std::bitset<TEMP> binaryNumber);
     void sumaExponentes(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
-    void setExponent(int exp, std::bitset<TEMP> binary);
+    void setExponent(int exp, std::bitset<TEMP> *binary);
     int sumarMantisas(std::bitset<TEMP> res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2 );
     void multiplicarMantisas(std::bitset<TEMP> * res,std::bitset<TEMP> oper1,std::bitset<TEMP> oper2);
     void desplazarMantisa(std::bitset<TEMP> oper,float op1_exp, float op2_exp);
