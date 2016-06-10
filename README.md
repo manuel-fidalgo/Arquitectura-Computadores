@@ -1,2 +1,1 @@
-Repsitorio para todas las practicas de Arquitectura de computadores
-
+This repository contains all my projects for "Arquitectura de computadores" course.
